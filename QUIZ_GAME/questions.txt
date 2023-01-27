@@ -1,0 +1,29 @@
+TF;A superclass's constructor must always invoke the subclass's constructor first.;false;12
+MC;@param is a:;3;Instance Variable;Class Variable;Javadoc tag;C;10
+FB;______ is the best CISC class.;230;50
+FB;In Java "2==1||3!=4" evaluates to _______.;true;4
+TF; Closing the scanner makes the warning go away.;true;14
+MC;Is java the best ?:;3;yes; no; maybe;a;5
+TF;Scanner can scan a String;true;10
+TF;Java has Objects;true;5
+TF;You can override a String method.; true;5
+TF;You can run java without a driver class.;false;6
+TF;Java does not have null-pointer exception.;false;6
+TF;Java is  not a language;false;7
+TF;Commenting is not important;false;9
+TF;You don't have to follow the style guide;false;5
+TF;230 is the hardest class; true;9
+TF;You can write if(!condition);true;6
+TF;input.close  is how you close the Scanner;true;6
+TF;Sets can have duplicates;true;5
+TF;Java has an in-built sorting method;true;6
+TF;polymorphism be done using Interface;true;100
+
+ 
+
+
+
+
+
+
+
