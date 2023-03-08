@@ -55,3 +55,24 @@ The function has one parameter:
 sheet_names: a list of names of sheets within a workbook.
 Example usage
 To use the def main() function, you need to call it explicitly by adding main() at the end of the script. For example:
+
+
+if __name__ == '__main__':
+    import openpyxl
+    import pandas as pd
+    import time
+
+    file_with_data = '/Users/fallout/PycharmProjects/union_rates_time_series/data.xlsx'
+    target_file = '/Users/fallout/Downloads/location.xlsx'
+
+    ####################################################################################################################
+
+    tick = time.time()
+    df = pd.read_excel(file_with_data)
+    wb = openpyxl.load_workbook(target_file)
+    tock = time.time()
+    city_state_index = 0
+    print(f'{tock - tick} seconds, to open the file')
+
+    city, state = data_split
+
