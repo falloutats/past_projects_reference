@@ -1,5 +1,7 @@
 # README
 
+## homedepot_data.py
+
 This is a `Python` script for web scraping using the Scrapy framework. It defines a spider named "Data" that is used to scrape pricing information for products from a retail website.
 
 The spider starts by prompting the user to enter a name for the output file. It then defines a dictionary called "cmp" that will be used to store the scraped data. The spider then defines a method called "closed" that will be called when the spider is finished. The "closed" method creates a Pandas dataframe from the data in the "cmp" dictionary and writes it to an Excel file with the name entered by the user.
