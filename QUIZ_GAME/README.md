@@ -32,5 +32,5 @@ Questions are sourced from a user-specified file. Each line represents a single 
 
 ## FileReader Utility
 
-To assist in reading files, we've provided the `FileReader` utility. Before diving into its functionalities, it's recommended to comment on the class. This will help understand its operations better.
+To assist in reading files, we've provided the `FileReader` utility.
 
