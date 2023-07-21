@@ -1,31 +1,49 @@
-# README
+# Game Documentation
 
-This is a demo for a board game implemented in Java. It contains a `Board` class that represents the game board and a `Boardable` interface that represents the game pieces. The `Board` class has a nested `Cel` class to represent each cell on the board.
+## Board Class
 
-The `Board` class has the following methods:
+The `Board` class has undergone several updates:
 
-`Board(int height, int width)`: a constructor that initializes a new board with the given height and width.
-`move(Direction dir, Boardable elem)`: a method that moves a Boardable element in the given direction on the board.
-`removeElement(Boardable elem)`: a method that removes a Boardable element from the board.
-`getRow(Boardable elem)`: a method that returns the row index of a Boardable element on the board.
-`getColumn(Boardable elem)`: a method that returns the column index of a Boardable element on the board.
-`setHugged(boolean hugged)`: a method that sets the hugged instance variable to the given boolean value.
-`beenHugged()`: a method that returns whether or not the hugged instance variable has been set to true.
-`placeElement(Boardable elem, int row, int col)`: a method that places a Boardable element on the board at the given row and column indices.
-`printBoard()`: a method that prints the current state of the board.
+- **New Methods & Field**: The Board now includes several new methods and a new field, most of which are intuitive.
+- **removeElement**: This method should remove the passed-in element from the board (from both the Cell and the elementPlace HashMap). It returns `true` if the element was removed and `false` otherwise.
+- **getRow & getColumn**: These methods return the row and column coordinates of a given element. If the element is not on the board, they throw an `IllegalArgumentException`.
+- **beenHugged & setHugged**: Accessor methods for the `hugged` instance variable. Note: Only `Jarvis` should call `setHugged`.
 
-The `Boardable` interface has the following methods:
+You might need to modify `placeElement` and `move` as Cells can now contain multiple `Boardable` objects.
 
-`char getSymbol()`: a method that returns the symbol of the Boardable element.
-`void setSymbol(char symbol)`: a method that sets the symbol of the Boardable element.
-`void setBoard(Board board)`: a method that sets the board for the Boardable element.
-`void setRow(int row)`: a method that sets the row index of the Boardable element on the board.
-`void setColumn(int col)`: a method that sets the column index of the Boardable element on the board.
-`void move(Direction direction)`: a method that moves the Boardable element in the given direction on the board.
+## Boardable Interface
 
-The `Direction` enum represents the eight possible directions that a `Boardable` element can move on the board.
+A new method, `share`, has been introduced in the `Boardable` interface. All concrete implementations must define how `Boardable` objects interact when sharing a `Cell`.
+
+## Cell Class
+
+For the `Cell` class's `toString` method:
+- Return `"#"` if the Cell is not visible.
+- Return `" "` if the Cell is visible but empty.
+- Return the `toString` of the last element added if it's visible and contains elements. 
+
+A Cell becomes visible if any visible element is added to it. Once visible, it remains so.
+
+## Mobile Class
+
+`Mobile` is a new abstract class implementing both `Boardable` and `Runnable`. All its methods are currently abstract.
+
+## Player Class
+
+The `Player` class is the protagonist of the game. The `move` method interfaces with the user and calls `delay`. It should call `delay` before accepting any user input. Key commands for movement include:
 
 
-This demo also includes a `Main` class that sets up a sample game on the board and moves the elements around to demonstrate the functionality of the `Board` and `Boardable` classes.
+For `"s"`, the player indicates they wish to stay put. The `move` method also prints the board after each user input. The `run` method repeatedly calls `move` until Jarvis is hugged. The `delay` method ensures the player cannot act for `delayTime` milliseconds. The last action of `delay` is setting `delayTime` to zero. If the player is delayed, any moves entered are ignored. The `setDelay` method sets `delayTime`. A trap calls this method. If the Player is the first element in a Cell, its `share` method should always return `false`. The `toString` method returns `"*"`.
 
-Note: This demo is for illustrative purposes only and is not a complete or production-ready implementation of a board game. It is intended to demonstrate basic concepts and practices in Java programming.
+## Jarvis Class
+
+`Jarvis` represents Professor Jarvis, the true hero. If not hugged, Jarvis randomly moves in some direction every 500 milliseconds. Every 6th move, Jarvis can lay a trap in a nearby Cell. If Jarvis shares a Cell with a Player, he receives a hug, sets the Board's `hugged` variable, and prints a relevant message. Jarvis remains invisible with its `toString` returning `"?"`.
+
+## HomeworkTrap Class
+
+`HomeworkTrap` is the only type of trap Jarvis sets for now. If it shares a location with a Player, the trap sets the player's delay time to 5000 milliseconds, removes itself (the trap is sprung), and prints a relevant message. Traps are invisible with their `toString` returning `" "`.
+
+## Game Class
+
+Not in the UML, but you'll need a `Game` class. This class contains the main method, initializing the Board, Jarvis, and Player objects. Jarvis and Player must run in separate threads. Your game should never crash. As Jarvis and Player run in different threads, some methods might need synchronization.
+
