@@ -12,12 +12,6 @@ A classic board game implementation. Dive in to see the mechanics and the rules.
 
 Test your knowledge with this engaging quiz game. Can you score the highest?
 
-## Scripts
-
-- **HomeDepot_data.py**: A script designed to pull and process data related to Home Depot.
-  
-- **data_collection_1.py**: A generic data collection script. Useful for gathering and organizing data from different sources.
-
 ## Getting Started
 
 To get started with any of the projects or scripts:
